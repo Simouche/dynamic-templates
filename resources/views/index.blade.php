@@ -83,18 +83,28 @@
     <section id="contact">
         <div class="inner">
             <section>
-                <form method="post" action="#">
+                <form method="post" action="{{route('contact-form')}}">
+                    @csrf
                     <div class="field half first">
                         <label for="name">{{__("home.name")}}</label>
                         <input type="text" name="name" id="name"/>
+                        @error('name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                     <div class="field half">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email"/>
+                        @error('email')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                     <div class="field">
                         <label for="message">Message</label>
                         <textarea name="message" id="message" rows="6"></textarea>
+                        @error('message')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
                     </div>
                     <ul class="actions">
                         <li><input type="submit" value="{{__('home.send_message')}}" class="special"/></li>
@@ -144,7 +154,7 @@
                 </li>
             </ul>
             <ul class="copyright">
-                <li>&copy; Safe Soft 2020</li>
+                <li><a href="http://www.safesoft-dz.com/">&copy; Safe Soft 2020</a></li>
                 {{--                <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>--}}
             </ul>
         </div>
