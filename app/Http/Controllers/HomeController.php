@@ -41,9 +41,10 @@ class HomeController extends Controller
             "message" => $validatedData['message']
         );
 
-        Mail::send('mail', [], function ($message) use ($validatedData) {
-            $message->to('wassim@safesoft-dz.com', 'Wassim')
-                ->subject('this is a test')
+        Mail::send('mail', $validatedData, function ($message) use ($validatedData) {
+            $credentials = Credentials::all()->first();
+            $message->to($credentials->contact_email, 'Contact')
+                ->subject('Formulaire de contact')
                 ->from($validatedData['email']);
         });
 

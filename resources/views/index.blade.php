@@ -6,7 +6,7 @@
 -->
 <html>
 <head>
-    <title>Presence Web</title>
+    <title>{{$home->title}}</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <!--[if lte IE 8]>
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+    <link rel="shortcut icon" type="image/x-icon" href=setting('site.logo')/>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
         </nav>
     </header>
 
-    <!-- Menu -->
+    <!-- Menu
     <nav id="menu">
         <ul class="links">
             <li><a href="index.html">Home</a></li>
@@ -42,6 +43,7 @@
             {{--<li><a href="#" class="button fit">Log In</a></li>--}}
         </ul>
     </nav>
+    -->
 
     <!-- Banner -->
     <section id="banner" class="major">
