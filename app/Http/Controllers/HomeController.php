@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Articles;
-use App\Credentials;
-use App\Home;
-use App\SocialMedia;
+
+use App\MenuTitle;
+use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,16 +12,12 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $home = Home::all()->first();
-        $credentials = Credentials::all()->first();
-        $socialMedia = SocialMedia::all();
-        $articles = Articles::all();
+        $settings = Profile::all()->first();
+        $menus = MenuTitle::where('visible',true)->orderBy('id','asc')->get();
 
         return view('index', [
-                'home' => $home,
-                'credentials' => $credentials,
-                'socialMedia' => $socialMedia,
-                'articles' => $articles
+                'settings' => $settings,
+                'menus'=>$menus
             ]
         );
     }
@@ -42,8 +37,8 @@ class HomeController extends Controller
         );
 
         Mail::send('mail', $validatedData, function ($message) use ($validatedData) {
-            $credentials = Credentials::all()->first();
-            $message->to($credentials->contact_email, 'Contact')
+            $credentials = Settings::all()->first();
+            $message->to($credentials->reception_email, 'Contact')
                 ->subject('Formulaire de contact')
                 ->from($validatedData['email']);
         });

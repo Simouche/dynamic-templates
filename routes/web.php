@@ -19,3 +19,4 @@ Route::post('/', 'HomeController@contact')->name("contact-form");
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
