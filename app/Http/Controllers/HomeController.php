@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Carousel;
 use App\MenuTitle;
 use App\Profile;
 use Illuminate\Http\Request;
@@ -13,11 +14,13 @@ class HomeController extends Controller
     public function home()
     {
         $settings = Profile::all()->first();
-        $menus = MenuTitle::where('visible',true)->orderBy('id','asc')->get();
+        $menus = MenuTitle::where('visible', true)->orderBy('id', 'asc')->get();
+        $carousel = Carousel::all()->first();
 
         return view('index', [
                 'settings' => $settings,
-                'menus'=>$menus
+                'menus' => $menus,
+                'carousel' => $carousel
             ]
         );
     }
@@ -37,7 +40,7 @@ class HomeController extends Controller
         );
 
         Mail::send('mail', $validatedData, function ($message) use ($validatedData) {
-            $credentials = Settings::all()->first();
+            $credentials = Profile::all()->first();
             $message->to($credentials->reception_email, 'Contact')
                 ->subject('Formulaire de contact')
                 ->from($validatedData['email']);
